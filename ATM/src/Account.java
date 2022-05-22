@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -7,30 +9,32 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
+public class Account extends JFrame implements ActionListener, KeyListener {
 
-public class System implements ActionListener {
-
-    private JFrame SystemFrame = new JFrame();
     private double balanceValue = 35845; 
 	private JLabel Balance = new JLabel("Your balance is: USD " + getBalanceValue());
+	private JLabel bemVindo = new JLabel("Welcome again, " + Login.getReadUser());
     private JButton withdraw = new JButton("Withdraw");
     private JButton insertFunds = new JButton("Insert funds");
 
-    System() {
-        SystemFrame.setBounds(300,300,800,600);
-		SystemFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		SystemFrame.setLayout(null);
-        SystemFrame.setResizable(false);
-		SystemFrame.setVisible(true);
-        withdraw.setBounds(150, 400, 100, 25);
+    Account() {
+        this.setBounds(300,300,400,300);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLayout(null);
+        this.setResizable(false);
+		this.setVisible(true);
+        withdraw.setBounds(100, 200, 100, 25);
         withdraw.addActionListener(this);
-        insertFunds.setBounds(280, 400, 125, 25);
+        insertFunds.setBounds(200, 200, 125, 25);
         insertFunds.addActionListener(this);
-        Balance.setBounds(300, -50, 200, 200);
-        SystemFrame.add(withdraw);
-        SystemFrame.add(insertFunds);
-        SystemFrame.add(Balance);
-        SystemFrame.setLocationRelativeTo(null);
+        bemVindo.setBounds(10, -40, 150, 100);
+        Balance.setBounds(100, -50, 200, 200);
+        this.addKeyListener(this);
+        this.add(withdraw);
+        this.add(bemVindo);
+        this.add(insertFunds);
+        this.add(Balance);
+        this.setLocationRelativeTo(null);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -70,6 +74,26 @@ public class System implements ActionListener {
 
 	public void setBalanceValue(double balanceValue) {
 		this.balanceValue = balanceValue;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+		System.out.println("oi");
+		JOptionPane.showOptionDialog(null, "Do you want to close the app?", "Exit", 0, 0, null, null, e);
+		
+		}
 	}
 	
 }
